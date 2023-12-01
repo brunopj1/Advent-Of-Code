@@ -1,2 +1,8 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using Day1.Source;
+
+var input = File.ReadAllLines("Input/full.txt");
+
+//var result = Challenge1.Solve(input);
+var result = Challenge2.Solve(input);
+
+Console.WriteLine(result);
