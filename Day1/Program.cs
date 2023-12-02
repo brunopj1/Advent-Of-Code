@@ -1,6 +1,4 @@
-﻿using Day1.Source;
-
-var input = File.ReadAllLines("Input/full.txt");
+﻿var input = File.ReadAllLines("Input/full.txt");
 
 //var result = Challenge1.Solve(input);
 var result = Challenge2.Solve(input);

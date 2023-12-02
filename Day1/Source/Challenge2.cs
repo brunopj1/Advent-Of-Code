@@ -1,6 +1,5 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Day1.Source;
 internal static partial class Challenge2
 {
     [GeneratedRegex(@"(?=(one|two|three|four|five|six|seven|eight|nine|\d))")]

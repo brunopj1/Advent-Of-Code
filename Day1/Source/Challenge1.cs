@@ -1,5 +1,4 @@
-﻿namespace Day1.Source;
-internal static class Challenge1
+﻿internal static class Challenge1
 {
     public static int Solve(string[] input)
     {
