@@ -3,7 +3,7 @@ internal static class Challenge1
 {
     public static int Solve(string[] input)
     {
-        int firstNumber = -1;
+        var firstNumber = -1;
         var lastNumber = 0;
 
         var sum = 0;

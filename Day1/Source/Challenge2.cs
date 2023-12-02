@@ -8,15 +8,15 @@ internal static partial class Challenge2
 
     public static int Solve(string[] input)
     {
-        int sum = 0;
-        Regex regex = MyRegex();
+        var sum = 0;
+        var regex = MyRegex();
 
-        foreach (string line in input)
+        foreach (var line in input)
         {
             var results = regex.Matches(line);
 
-            int firstNumber = ConvertNumber(results.First().Groups.Values.ElementAt(1).Value);
-            int lastNumber = ConvertNumber(results.Last().Groups.Values.ElementAt(1).Value);
+            var firstNumber = ConvertNumber(results.First().Groups.Values.ElementAt(1).Value);
+            var lastNumber = ConvertNumber(results.Last().Groups.Values.ElementAt(1).Value);
 
             sum += 10 * firstNumber + lastNumber;
         }
