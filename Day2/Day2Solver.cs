@@ -1,11 +1,43 @@
 ﻿using System.Text.RegularExpressions;
+using Common;
 
-internal static partial class Challenge2
+internal partial class Day2Solver : Solver
 {
-    [GeneratedRegex(@"[,;]? ")]
-    private static partial Regex MyRegex();
+    protected override object SolveChallenge1(string[] input)
+    {
+        var total = 0;
 
-    public static int Solve(string[] input)
+        foreach (var line in input)
+        {
+            var components = line.Split(": ");
+            var gameId = int.Parse(components[0][5..]);
+            var isGameValid = true;
+
+            var cubes = MyRegex().Split(components[1]);
+
+            for (var i = 0; i < cubes.Length; i += 2)
+            {
+                var count = int.Parse(cubes[i]);
+                var color = cubes[i + 1];
+
+                isGameValid = color switch
+                {
+                    "red" => count <= 12,
+                    "green" => count <= 13,
+                    "blue" => count <= 14,
+                    _ => false
+                };
+
+                if (!isGameValid) break;
+            }
+
+            if (isGameValid) total += gameId;
+        }
+
+        return total;
+    }
+
+    protected override object SolveChallenge2(string[] input)
     {
         var total = 0;
 
@@ -45,4 +77,7 @@ internal static partial class Challenge2
 
         return total;
     }
+
+    [GeneratedRegex(@"[,;]? ")]
+    private static partial Regex MyRegex();
 }

@@ -1,8 +1,19 @@
 {
   "profiles": {
-    "Run": {
+    "Example 1": {
       "commandName": "Project",
-      "workingDirectory": "$(ProjectDir)"
+      "workingDirectory": "$(ProjectDir)",
+      "commandLineArgs": "Input/example1.txt"
+    },
+    "Example 2": {
+      "commandName": "Project",
+      "workingDirectory": "$(ProjectDir)",
+      "commandLineArgs": "Input/example2.txt"
+    },
+    "Solve": {
+      "commandName": "Project",
+      "workingDirectory": "$(ProjectDir)",
+      "commandLineArgs": "Input/full.txt"
     }
   }
 }
