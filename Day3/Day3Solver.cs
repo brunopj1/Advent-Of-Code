@@ -74,7 +74,7 @@ internal partial class Day3Solver : Solver
         return total;
     }
 
-    private HashSet<(int, int)> CalculateValidCells(string[] input)
+    private static HashSet<(int, int)> CalculateValidCells(string[] input)
     {
         var validCells = new HashSet<(int, int)>();
 
@@ -108,7 +108,7 @@ internal partial class Day3Solver : Solver
         public int Value { get; set; } = 0;
     }
 
-    private Dictionary<(int, int), BoxedInt> CalculateCellNumbers(string[] input)
+    private static Dictionary<(int, int), BoxedInt> CalculateCellNumbers(string[] input)
     {
         var cellNumbers = new Dictionary<(int, int), BoxedInt>();
 
@@ -137,7 +137,7 @@ internal partial class Day3Solver : Solver
         return cellNumbers;
     }
 
-    private IEnumerable<BoxedInt> GetNumbersAround(int line, int column, Dictionary<(int, int), BoxedInt> cellNumbers)
+    private static IEnumerable<BoxedInt> GetNumbersAround(int line, int column, Dictionary<(int, int), BoxedInt> cellNumbers)
     {
         var result = new HashSet<BoxedInt>();
 

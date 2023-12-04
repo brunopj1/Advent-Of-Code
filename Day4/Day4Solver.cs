@@ -13,7 +13,6 @@ internal partial class Day4Solver : Solver
         foreach (var line in input)
         {
             var components = cardRegex.Split(line);
-            var gameId = int.Parse(components[0][5..]);
 
             var winningNumbers = numbersRegex.Matches(components[1]).Select(x => int.Parse(x.Value)).ToHashSet();
             var myNumbers = numbersRegex.Matches(components[2]).Select(x => int.Parse(x.Value)).ToHashSet();
