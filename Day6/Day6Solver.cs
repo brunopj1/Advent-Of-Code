@@ -43,7 +43,7 @@ internal partial class Day6Solver : Solver
         return solutions;
     }
 
-    private List<Data> ParseInput(string[] input)
+    private static List<Data> ParseInput(string[] input)
     {
         var regex = MyRegex();
 
@@ -66,8 +66,6 @@ internal partial class Day6Solver : Solver
 
     private Data ParseInput2(string[] input)
     {
-        var regex = MyRegex();
-
         var time = input[0][5..].Replace(" ", null);
         var distance = input[1][9..].Replace(" ", null);
 
