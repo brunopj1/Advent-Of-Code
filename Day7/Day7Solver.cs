@@ -4,30 +4,12 @@ internal partial class Day7Solver : Solver
 {
     protected override object SolveChallenge1(string[] input)
     {
-        var hands = ParseHands1(input);
-
-        var total = 0ul;
-
-        for (var i = 0; i < hands.Count; i++)
-        {
-            total += (uint)(i + 1) * hands[i].Bid;
-        }
-
-        return total;
+        return ParseHands(input, ComputeHandRank1, GetCardRank1);
     }
 
     protected override object SolveChallenge2(string[] input)
     {
-        var hands = ParseHands2(input);
-
-        var total = 0ul;
-
-        for (var i = 0; i < hands.Count; i++)
-        {
-            total += (uint)(i + 1) * hands[i].Bid;
-        }
-
-        return total;
+        return ParseHands(input, ComputeHandRank2, GetCardRank2);
     }
 
     private class Hand
@@ -67,7 +49,7 @@ internal partial class Day7Solver : Solver
         FiveOfAKind = 7
     }
 
-    private static List<Hand> ParseHands1(string[] input)
+    private static ulong ParseHands(string[] input, Func<Dictionary<char, int>, Rank> handRankFunction, Func<char, int> cardRankFunction)
     {
         var hands = new List<Hand>();
 
@@ -87,40 +69,19 @@ internal partial class Day7Solver : Solver
                 cardsDict[card] = count + 1;
             }
 
-            hand.Rank = ComputeHandRank1(cardsDict);
+            hand.Rank = handRankFunction(cardsDict);
         }
 
-        hands.Sort((x, y) => x.CompareTo(y, GetCardRank1));
+        hands.Sort((x, y) => x.CompareTo(y, cardRankFunction));
 
-        return hands;
-    }
+        var total = 0ul;
 
-    private static List<Hand> ParseHands2(string[] input)
-    {
-        var hands = new List<Hand>();
-
-        foreach (var line in input)
+        for (var i = 0; i < hands.Count; i++)
         {
-            var hand = new Hand();
-            hands.Add(hand);
-
-            var components = line.Split(' ');
-            hand.Cards = components[0];
-            hand.Bid = uint.Parse(components[1]);
-
-            var cardsDict = new Dictionary<char, int>();
-            foreach (var card in hand.Cards)
-            {
-                var count = cardsDict.GetValueOrDefault(card, 0);
-                cardsDict[card] = count + 1;
-            }
-
-            hand.Rank = ComputeHandRank2(cardsDict);
+            total += (uint)(i + 1) * hands[i].Bid;
         }
 
-        hands.Sort((x, y) => x.CompareTo(y, GetCardRank2));
-
-        return hands;
+        return total;
     }
 
     private static Rank ComputeHandRank1(Dictionary<char, int> cardsDict)
