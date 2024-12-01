@@ -12,14 +12,12 @@ public static partial class Runner
         var solvers = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(x => x.GetTypes())
             .Where(x => regex.IsMatch(x.Name) && x.IsClass)
+            .OrderBy(x => x.Name)
             .ToList();
 
         if (args[0] == "latest")
         {
-            solvers = solvers
-                .OrderByDescending(x => x.Name)
-                .Take(1)
-                .ToList();
+            solvers = [ solvers.Last() ];
         }
 
         foreach (var type in solvers)
