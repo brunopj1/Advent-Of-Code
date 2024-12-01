@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34322.80
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AAABADA8-A3B3-4858-9745-F453DC7A0D27}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		LICENSE.txt = LICENSE.txt
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{91019252-5936-467C-A803-5195B5CD01DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Year2023", "Year2023\Year2023.csproj", "{50D0CEEB-B402-4D44-9139-792246DAA187}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{91019252-5936-467C-A803-5195B5CD01DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91019252-5936-467C-A803-5195B5CD01DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91019252-5936-467C-A803-5195B5CD01DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91019252-5936-467C-A803-5195B5CD01DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50D0CEEB-B402-4D44-9139-792246DAA187}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50D0CEEB-B402-4D44-9139-792246DAA187}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50D0CEEB-B402-4D44-9139-792246DAA187}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50D0CEEB-B402-4D44-9139-792246DAA187}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {974EC023-64B9-4D8E-BA57-4552E542850D}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+	EndGlobalSection
+	GlobalSection(RiderSharedRunConfigurations) = postSolution
+	EndGlobalSection
+EndGlobal
