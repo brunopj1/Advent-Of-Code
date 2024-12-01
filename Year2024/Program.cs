@@ -1,0 +1,1 @@
+﻿Common.Runner.Run(args);
