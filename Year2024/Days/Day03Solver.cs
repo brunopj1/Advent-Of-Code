@@ -32,7 +32,7 @@ public class Day03Solver : Solver
         {
             var results = regex.Matches(line);
 
-            foreach (Match? match in results)
+            foreach (Match match in results)
             {
                 if (match.Value == "do()")
                 {
