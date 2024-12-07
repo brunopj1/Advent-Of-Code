@@ -4,16 +4,16 @@ namespace Year2024.Days;
 
 public class Day02Solver : Solver
 {
-    public override string SolveChallenge1(string[] input)
+    public override object SolveChallenge1(string[] input)
     {
         var parsed = ParseInput(input);
-        return parsed.Count(CheckLine).ToString();
+        return parsed.Count(CheckLine);
     }
 
-    public override string SolveChallenge2(string[] input)
+    public override object SolveChallenge2(string[] input)
     {
         var parsed = ParseInput(input);
-        return parsed.Count(x => CheckLine(x) || CheckLineButSkip(x)).ToString();
+        return parsed.Count(x => CheckLine(x) || CheckLineButSkip(x));
     }
 
     private static List<List<int>> ParseInput(string[] input)

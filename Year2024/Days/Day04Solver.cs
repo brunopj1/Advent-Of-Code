@@ -5,7 +5,7 @@ namespace Year2024.Days;
 
 public class Day04Solver : Solver
 {
-    public override string SolveChallenge1(string[] input)
+    public override object SolveChallenge1(string[] input)
     {
         var count = 0;
         
@@ -24,10 +24,10 @@ public class Day04Solver : Solver
             }
         }
         
-        return count.ToString();
+        return count;
     }
 
-    public override string SolveChallenge2(string[] input)
+    public override object SolveChallenge2(string[] input)
     {
         var count = 0;
 
@@ -39,7 +39,7 @@ public class Day04Solver : Solver
             }
         }
         
-        return count.ToString();
+        return count;
     }
     
     private static bool FindXmas1(string[] input, int x, int y, int sizeX, int sizeY, int stepX, int stepY)

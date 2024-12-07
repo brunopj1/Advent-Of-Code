@@ -5,7 +5,7 @@ namespace Year2024.Days;
 
 public class Day03Solver : Solver
 {
-    public override string SolveChallenge1(string[] input)
+    public override object SolveChallenge1(string[] input)
     {
         var regex = new Regex(@"mul\((\d+),(\d+)\)");
 
@@ -18,10 +18,10 @@ public class Day03Solver : Solver
             sum += results.Sum(x => int.Parse(x.Groups[1].Value) * int.Parse(x.Groups[2].Value));
         }
         
-        return sum.ToString();
+        return sum;
     }
 
-    public override string SolveChallenge2(string[] input)
+    public override object SolveChallenge2(string[] input)
     {
         var regex = new Regex(@"mul\((\d+),(\d+)\)|do\(\)|don't\(\)");
 
@@ -49,6 +49,6 @@ public class Day03Solver : Solver
             }
         }
         
-        return sum.ToString();
+        return sum;
     }
 }

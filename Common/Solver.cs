@@ -2,6 +2,6 @@
 
 public abstract class Solver
 {
-    public abstract string SolveChallenge1(string[] input);
-    public abstract string SolveChallenge2(string[] input);
+    public abstract object SolveChallenge1(string[] input);
+    public abstract object SolveChallenge2(string[] input);
 }

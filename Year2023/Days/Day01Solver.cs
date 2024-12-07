@@ -5,7 +5,7 @@ namespace Year2023.Days;
 
 internal partial class Day1Solver : Solver
 {
-    public override string SolveChallenge1(string[] input)
+    public override object SolveChallenge1(string[] input)
     {
         var firstNumber = -1;
         var lastNumber = 0;
@@ -32,10 +32,10 @@ internal partial class Day1Solver : Solver
             firstNumber = -1;
         }
 
-        return sum.ToString();
+        return sum;
     }
 
-    public override string SolveChallenge2(string[] input)
+    public override object SolveChallenge2(string[] input)
     {
         var sum = 0;
         var regex = Challenge2Regex();
@@ -50,7 +50,7 @@ internal partial class Day1Solver : Solver
             sum += 10 * firstNumber + lastNumber;
         }
 
-        return sum.ToString();
+        return sum;
     }
 
     [GeneratedRegex(@"(?=(one|two|three|four|five|six|seven|eight|nine|\d))")]

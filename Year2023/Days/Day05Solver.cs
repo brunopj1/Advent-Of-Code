@@ -4,7 +4,7 @@ namespace Year2023.Days;
 
 internal partial class Day5Solver : Solver
 {
-    public override string SolveChallenge1(string[] input)
+    public override object SolveChallenge1(string[] input)
     {
         var seeds = ExtractSeeds(input);
         var maps = ExtractMaps(input);
@@ -16,10 +16,10 @@ internal partial class Day5Solver : Solver
             min = Math.Min(min, ApplyMaps(seed, maps));
         }
 
-        return min.ToString();
+        return min;
     }
 
-    public override string SolveChallenge2(string[] input)
+    public override object SolveChallenge2(string[] input)
     {
         var seedRanges = ExtractSeedRanges(input);
         var maps = ExtractMaps(input);
@@ -44,7 +44,7 @@ internal partial class Day5Solver : Solver
             inputRanges = outputRanges;
         }
 
-        return inputRanges[0].Item1.ToString();
+        return inputRanges[0].Item1;
     }
 
     private static uint[] ExtractSeeds(string[] input)

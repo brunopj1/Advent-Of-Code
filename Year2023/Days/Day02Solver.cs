@@ -5,7 +5,7 @@ namespace Year2023.Days;
 
 internal partial class Day2Solver : Solver
 {
-    public override string SolveChallenge1(string[] input)
+    public override object SolveChallenge1(string[] input)
     {
         var total = 0;
 
@@ -36,10 +36,10 @@ internal partial class Day2Solver : Solver
             if (isGameValid) total += gameId;
         }
 
-        return total.ToString();
+        return total;
     }
 
-    public override string SolveChallenge2(string[] input)
+    public override object SolveChallenge2(string[] input)
     {
         var total = 0;
 
@@ -77,7 +77,7 @@ internal partial class Day2Solver : Solver
             total += red * green * blue;
         }
 
-        return total.ToString();
+        return total;
     }
 
     [GeneratedRegex(@"[,;]? ")]

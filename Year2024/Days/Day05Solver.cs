@@ -5,7 +5,7 @@ namespace Year2024.Days;
 
 public class Day05Solver : Solver
 {
-    public override string SolveChallenge1(string[] input)
+    public override object SolveChallenge1(string[] input)
     {
         var restrictions = ParseRestrictions(input, out var count);
 
@@ -15,10 +15,10 @@ public class Day05Solver : Solver
             .Where(pages => CheckOrder(pages, restrictions))
             .Sum(pages => pages[pages.Count / 2]);
 
-        return result.ToString();
+        return result;
     }
 
-    public override string SolveChallenge2(string[] input)
+    public override object SolveChallenge2(string[] input)
     {
         var restrictions = ParseRestrictions(input, out var count);
 
@@ -30,7 +30,7 @@ public class Day05Solver : Solver
             .Where(pages => CheckOrder(pages, restrictions))
             .Sum(pages => pages[pages.Count / 2]);
 
-        return result.ToString();
+        return result;
     }
 
     private static Dictionary<int, List<int>> ParseRestrictions(string[] input, out int count)

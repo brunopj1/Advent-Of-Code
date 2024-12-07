@@ -8,7 +8,7 @@ internal partial class Day3Solver : Solver
     [GeneratedRegex(@"[^\d\.]")]
     private static partial Regex SymbolRegex();
 
-    public override string SolveChallenge1(string[] input)
+    public override object SolveChallenge1(string[] input)
     {
         var total = 0;
         var validCells = CalculateValidCells(input);
@@ -46,10 +46,10 @@ internal partial class Day3Solver : Solver
             }
         }
 
-        return total.ToString();
+        return total;
     }
 
-    public override string SolveChallenge2(string[] input)
+    public override object SolveChallenge2(string[] input)
     {
         var total = 0;
         var cellNumbers = CalculateCellNumbers(input);
@@ -73,7 +73,7 @@ internal partial class Day3Solver : Solver
             }
         }
 
-        return total.ToString();
+        return total;
     }
 
     private static HashSet<(int, int)> CalculateValidCells(string[] input)

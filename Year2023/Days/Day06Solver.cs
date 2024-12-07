@@ -5,7 +5,7 @@ namespace Year2023.Days;
 
 internal partial class Day06Solver : Solver
 {
-    public override string SolveChallenge1(string[] input)
+    public override object SolveChallenge1(string[] input)
     {
         var data = ParseInput(input);
         var total = 1;
@@ -25,10 +25,10 @@ internal partial class Day06Solver : Solver
             if (solutions > 0) total *= solutions;
         }
 
-        return total.ToString();
+        return total;
     }
 
-    public override string SolveChallenge2(string[] input)
+    public override object SolveChallenge2(string[] input)
     {
         var data = ParseInput2(input);
 
@@ -42,7 +42,7 @@ internal partial class Day06Solver : Solver
             if (speed * time > data.Distance) solutions++;
         }
 
-        return solutions.ToString();
+        return solutions;
     }
 
     private static List<Data> ParseInput(string[] input)

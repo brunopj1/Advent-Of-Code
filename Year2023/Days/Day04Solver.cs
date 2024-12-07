@@ -5,7 +5,7 @@ namespace Year2023.Days;
 
 internal partial class Day4Solver : Solver
 {
-    public override string SolveChallenge1(string[] input)
+    public override object SolveChallenge1(string[] input)
     {
         var total = 0;
 
@@ -23,10 +23,10 @@ internal partial class Day4Solver : Solver
             total += 1 << (matches - 1);
         }
 
-        return total.ToString();
+        return total;
     }
 
-    public override string SolveChallenge2(string[] input)
+    public override object SolveChallenge2(string[] input)
     {
         var cardCounts = Enumerable.Repeat(1, input.Length).ToArray();
 
@@ -56,7 +56,7 @@ internal partial class Day4Solver : Solver
             }
         }
 
-        return cardCounts.Sum().ToString();
+        return cardCounts.Sum();
     }
 
     [GeneratedRegex(@": | \| ")]

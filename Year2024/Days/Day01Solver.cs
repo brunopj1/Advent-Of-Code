@@ -4,7 +4,7 @@ namespace Year2024.Days;
 
 public class Day01Solver : Solver
 {
-    public override string SolveChallenge1(string[] input)
+    public override object SolveChallenge1(string[] input)
     {
         var list1 = new List<int>(input.Length);
         var list2 = new List<int>(input.Length);
@@ -20,11 +20,10 @@ public class Day01Solver : Solver
         
         return input
             .Select((_, i) => int.Abs(list1[i] - list2[i]))
-            .Sum()
-            .ToString();
+            .Sum();
     }
 
-    public override string SolveChallenge2(string[] input)
+    public override object SolveChallenge2(string[] input)
     {
         var list1 = new List<int>(input.Length);
         var values = new Dictionary<int, int>(input.Length);
@@ -39,8 +38,7 @@ public class Day01Solver : Solver
         
         return list1
             .Select(x => x * values.GetValueOrDefault(x, 0))
-            .Sum()
-            .ToString();
+            .Sum();
         
     }
 }

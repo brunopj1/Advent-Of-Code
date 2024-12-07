@@ -6,7 +6,7 @@ namespace Year2023.Days;
 
 internal partial class Day8Solver : Solver
 {
-    public override string SolveChallenge1(string[] input)
+    public override object SolveChallenge1(string[] input)
     {
         ParseInput(input, out var directions, out var paths);
 
@@ -24,10 +24,10 @@ internal partial class Day8Solver : Solver
             idx = (idx + 1) % directions.Count;
         }
 
-        return distance.ToString();
+        return distance;
     }
 
-    public override string SolveChallenge2(string[] input)
+    public override object SolveChallenge2(string[] input)
     {
         ParseInput(input, out var directions, out var paths);
 
@@ -54,7 +54,7 @@ internal partial class Day8Solver : Solver
             results.Add(distance);
         }
 
-        return LCM(results).ToString();
+        return LCM(results);
     }
 
     private void ParseInput(string[] input, out List<bool> directions, out Dictionary<string, (string, string)> paths)

@@ -4,12 +4,12 @@ namespace Year2023.Days;
 
 internal partial class Day7Solver : Solver
 {
-    public override string SolveChallenge1(string[] input)
+    public override object SolveChallenge1(string[] input)
     {
         return ParseHands(input, ComputeHandRank1, GetCardRank1);
     }
 
-    public override string SolveChallenge2(string[] input)
+    public override object SolveChallenge2(string[] input)
     {
         return ParseHands(input, ComputeHandRank2, GetCardRank2);
     }
@@ -51,7 +51,7 @@ internal partial class Day7Solver : Solver
         FiveOfAKind = 7
     }
 
-    private static string ParseHands(string[] input, Func<Dictionary<char, int>, Rank> handRankFunction, Func<char, int> cardRankFunction)
+    private static object ParseHands(string[] input, Func<Dictionary<char, int>, Rank> handRankFunction, Func<char, int> cardRankFunction)
     {
         var hands = new List<Hand>();
 
@@ -83,7 +83,7 @@ internal partial class Day7Solver : Solver
             total += (uint)(i + 1) * hands[i].Bid;
         }
 
-        return total.ToString();
+        return total;
     }
 
     private static Rank ComputeHandRank1(Dictionary<char, int> cardsDict)
