@@ -4,28 +4,29 @@ namespace Year2024.Days;
 
 public class Day06Solver : Solver
 {
-    private static readonly byte Empty    = 0b0_0000;
-    private static readonly byte Obstacle = 0b1_0000;
-    private static readonly byte DirUp    = 0b0_0001;
-    private static readonly byte DirDown  = 0b0_0010;
-    private static readonly byte DirLeft  = 0b0_0100;
-    private static readonly byte DirRight = 0b0_1000;
+    private static readonly byte Empty        = 0b0_0000;
+    private static readonly byte Obstacle     = 0b1_0000;
+    private static readonly byte Visited      = 0b1_1111;
+    private static readonly byte VisitedUp    = 0b0_0001;
+    private static readonly byte VisitedDown  = 0b0_0010;
+    private static readonly byte VisitedLeft  = 0b0_0100;
+    private static readonly byte VisitedRight = 0b0_1000;
     
     public override object SolveChallenge1(string[] input)
     {
         var map = ParseMap(input, out var x, out var y);
-        var (maxX, maxY) = (map.Length, map[0].Length);
+        var (maxX, maxY) = (map.GetLength(0), map.GetLength(1));
         
         var (dirX, dirY) = (-1, 0);
-        var dirByte = DirUp;
+        var dirByte = VisitedUp;
         
         var result = 0;
 
         while (true)
         {
-            if (map[x][y] == '.')
+            if (map[x, y] == Empty)
             {
-                map[x][y] = 'X';
+                map[x, y] = Visited;
                 result++;
             }
             
@@ -36,9 +37,79 @@ public class Day06Solver : Solver
                 break;
             }
             
-            if (map[nextX][nextY] == '#')
+            while (map[nextX, nextY] == Obstacle)
             {
                 Rotate(ref dirX, ref dirY, ref dirByte);
+                nextX = x + dirX;
+                nextY = y + dirY;
+            }
+            
+            x = nextX;
+            y = nextY;
+        }
+        
+        return result;
+    }
+
+    public override object SolveChallenge2(string[] input)
+    {
+        var map = ParseMap(input, out var x, out var y);
+        var (maxX, maxY) = (map.GetLength(0), map.GetLength(1));
+        var mapCopy = (byte[,])map.Clone();
+        
+        var (dirX, dirY) = (-1, 0);
+        var dirByte = VisitedUp;
+        
+        var result = 0;
+        
+        while (true)
+        {
+            if ((map[x, y] & dirByte) > 0) break;
+
+            map[x, y] = (byte)(map[x, y] | dirByte);
+            
+            var (nextX, nextY) = (x + dirX, y + dirY);
+
+            if (nextX < 0 || nextX >= maxX || nextY < 0 || nextY >= maxY)
+            {
+                break;
+            }
+            
+            if (map[nextX, nextY] == Empty)
+            {
+                mapCopy[nextX, nextY] = Obstacle;
+
+                if (CheckLoop(mapCopy, maxX, maxY, x, y, dirX, dirY, dirByte))
+                {
+                    result++;
+                }
+                
+                map[nextX, nextY] = Empty;
+                RevertMap(map, mapCopy, maxX, maxY);
+            }
+
+            var rotated = false;
+            
+            while (map[nextX, nextY] == Obstacle)
+            {
+                Rotate(ref dirX, ref dirY, ref dirByte);
+                map[x, y] = (byte)(map[x, y] | dirByte);
+                nextX = x + dirX;
+                nextY = y + dirY;
+                rotated = true;
+            }
+            
+            if (rotated && map[nextX, nextY] == Empty)
+            {
+                mapCopy[nextX, nextY] = Obstacle;
+
+                if (CheckLoop(mapCopy, maxX, maxY, x, y, dirX, dirY, dirByte))
+                {
+                    result++;
+                }
+                
+                map[nextX, nextY] = Empty;
+                RevertMap(map, mapCopy, maxX, maxY);
             }
             
             x += dirX;
@@ -48,72 +119,36 @@ public class Day06Solver : Solver
         return result;
     }
 
-    public override object SolveChallenge2(string[] input)
+    private static byte[,] ParseMap(string[] input, out int startX, out int startY)
     {
-        var map = MapToBytes(ParseMap(input, out var x, out var y));
-        var (maxX, maxY) = (map.Length, map[0].Length);
-        
-        var (dirX, dirY) = (-1, 0);
-        var dirByte = DirUp;
-
-        var result = 0;
-        var lockObject = new object();
-        
-        Parallel.For(0, maxX, i =>
-        {
-            var mapCopy = map.Select(v => v.ToArray()).ToArray();
-
-            for (var j = 0; j < maxY; j++)
-            {
-                if (i == x && j == y) continue;
-
-                if (mapCopy[i][j] == Obstacle) continue;
-
-                mapCopy[i][j] = Obstacle;
-
-                if (CheckLoop(mapCopy, maxX, maxY, x, y, dirX, dirY, dirByte))
-                {
-                    lock (lockObject) result++;
-                }
-
-                ClearMap(mapCopy, maxX, maxY);
-
-                mapCopy[i][j] = Empty;
-            }
-        });
-        
-        return result;
-    }
-
-    private static char[][] ParseMap(string[] input, out int startX, out int startY)
-    {
-        var map = input.Select(x => x.ToCharArray()).ToArray();
+        var (maxX, maxY) = (input.Length, input[0].Length);
+        var map = new byte[input.Length, input[0].Length];
         
         startX = 0;
         startY = 0;
 
-        for (var x = 0; x < map.Length; x++)
+        for (var x = 0; x < maxX; x++)
         {
-            for (var y = 0; y < map[0].Length; y++)
+            for (var y = 0; y < maxY; y++)
             {
-                if (map[x][y] == '^')
+                switch (input[x][y])
                 {
-                    map[x][y] = '.';
-                    
-                    startX = x;
-                    startY = y;
-                    
-                    break;
+                    case '.':
+                        map[x, y] = Empty;
+                        break;
+                    case '#':
+                        map[x, y] = Obstacle;
+                        break;
+                    case '^':
+                        map[x, y] = Empty;
+                        startX = x;
+                        startY = y;
+                        break;
                 }
             }
         }
 
         return map;
-    }
-
-    private static byte[][] MapToBytes(char[][] charMap)
-    {
-        return charMap.Select(x => x.Select(y => y == '.' ? Empty : Obstacle).ToArray()).ToArray();
     }
 
     private static void Rotate(ref int dirX, ref int dirY, ref byte dirByte)
@@ -122,35 +157,37 @@ public class Day06Solver : Solver
         {
             dirX = 0;
             dirY = -1;
-            dirByte = DirLeft;
+            dirByte = VisitedLeft;
         }
         else if (dirX == -1)
         {
             dirX = 0;
             dirY = 1;
-            dirByte = DirRight;
+            dirByte = VisitedRight;
         }
         else if (dirY == 1)
         {
             dirX = 1;
             dirY = 0;
-            dirByte = DirDown;
+            dirByte = VisitedDown;
         }
         else if (dirY == -1)
         {
             dirX = -1;
             dirY = 0;
-            dirByte = DirUp;
+            dirByte = VisitedUp;
         }
     }
 
-    private static bool CheckLoop(byte[][] map, int maxX, int maxY, int x, int y, int dirX, int dirY, byte dirByte)
+    private static bool CheckLoop(byte[,] map, int maxX, int maxY, int x, int y, int dirX, int dirY, byte dirByte)
     {
+        map[x, y] = (byte)(map[x, y] & ~dirByte);
+        
         while (true)
         {
-            if ((map[x][y] & dirByte) > 0) return true;
+            if ((map[x, y] & dirByte) > 0) return true;
             
-            map[x][y] = (byte)(map[x][y] | dirByte);
+            map[x, y] = (byte)(map[x, y] | dirByte);
             
             var (nextX, nextY) = (x + dirX, y + dirY);
 
@@ -159,25 +196,26 @@ public class Day06Solver : Solver
                 return false;
             }
             
-            while (map[nextX][nextY] == Obstacle)
+            while (map[nextX, nextY] == Obstacle)
             {
                 Rotate(ref dirX, ref dirY, ref dirByte);
+                map[x, y] = (byte)(map[x, y] | dirByte);
                 nextX = x + dirX;
                 nextY = y + dirY;
             }
-            
-            x += dirX;
-            y += dirY;
+
+            x = nextX;
+            y = nextY;
         }
     }
 
-    private static void ClearMap(byte[][] map, int maxX, int maxY)
+    private static void RevertMap(byte[,] originalMap, byte[,] copiedMap, int maxX, int maxY)
     {
         for (var x = 0; x < maxX; x++)
         {
             for (var y = 0; y < maxY; y++)
             {
-                if ((map[x][y] & Obstacle) == 0) map[x][y] = Empty;
+                copiedMap[x, y] = originalMap[x, y];
             }
         }
     }
