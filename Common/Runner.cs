@@ -30,29 +30,29 @@ public static partial class Runner
             var files = FileReader.ReadFiles(day);
 
             var solutionEx1 = Execute(solver.SolveChallenge1, files[0], out var execTimeEx1);
-            Console.WriteLine($"Challenge 1 example solution: {solutionEx1} ({execTimeEx1} ms)");
+            Console.WriteLine($"Challenge 1 example solution: {solutionEx1} ({execTimeEx1:F2} ms)");
             
             var solutionFull1 = Execute(solver.SolveChallenge1, files[2], out var execTimeFull1);
-            Console.WriteLine($"Challenge 1 example solution: {solutionFull1} ({execTimeFull1} ms)");
+            Console.WriteLine($"Challenge 1 example solution: {solutionFull1} ({execTimeFull1:F2} ms)");
             
             var solutionEx2 = Execute(solver.SolveChallenge2, files[0], out var execTimeEx2);
-            Console.WriteLine($"Challenge 1 example solution: {solutionEx2} ({execTimeEx2} ms)");
+            Console.WriteLine($"Challenge 1 example solution: {solutionEx2} ({execTimeEx2:F2} ms)");
             
             var solutionFull2 = Execute(solver.SolveChallenge2, files[2], out var execTimeFull2);
-            Console.WriteLine($"Challenge 1 example solution: {solutionFull2} ({execTimeFull2} ms)");
+            Console.WriteLine($"Challenge 1 example solution: {solutionFull2} ({execTimeFull2:F2} ms)");
             
             Console.WriteLine();
         }
     }
 
-    private static object Execute(Func<string[], object> func, string[] input, out long execTime)
+    private static object Execute(Func<string[], object> func, string[] input, out double execTime)
     {
         var watch = System.Diagnostics.Stopwatch.StartNew();
         
         var solution = func(input);
         
         watch.Stop();
-        execTime = watch.ElapsedMilliseconds;
+        execTime = watch.Elapsed.TotalMilliseconds;
         
         return solution;
     }
