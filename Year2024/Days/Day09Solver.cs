@@ -99,13 +99,13 @@ public class Day09Solver : Solver
             }
         }
         
-        BigInteger result = 0;
-        var resultIdx = 0;
+        var result = 0L;
+        var resultIdx = 0L;
 
         foreach (var file in files)
         {
-            BigInteger from = resultIdx;
-            BigInteger to = resultIdx + file.Count - 1;
+            var from = resultIdx;
+            var to = resultIdx + file.Count - 1;
             result += (to - from + 1) * (from + to) / 2 * int.Max(file.Number, 0);
             resultIdx += file.Count;
         }
