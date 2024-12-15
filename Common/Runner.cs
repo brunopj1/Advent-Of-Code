@@ -33,13 +33,13 @@ public static partial class Runner
             Console.WriteLine($"Challenge 1 example solution: {solutionEx1} ({execTimeEx1:F2} ms)");
             
             var solutionFull1 = Execute(solver.SolveChallenge1, files[2], out var execTimeFull1);
-            Console.WriteLine($"Challenge 1 example solution: {solutionFull1} ({execTimeFull1:F2} ms)");
+            Console.WriteLine($"Challenge 1 full solution: {solutionFull1} ({execTimeFull1:F2} ms)");
             
             var solutionEx2 = Execute(solver.SolveChallenge2, files[0], out var execTimeEx2);
-            Console.WriteLine($"Challenge 1 example solution: {solutionEx2} ({execTimeEx2:F2} ms)");
+            Console.WriteLine($"Challenge 2 example solution: {solutionEx2} ({execTimeEx2:F2} ms)");
             
             var solutionFull2 = Execute(solver.SolveChallenge2, files[2], out var execTimeFull2);
-            Console.WriteLine($"Challenge 1 example solution: {solutionFull2} ({execTimeFull2:F2} ms)");
+            Console.WriteLine($"Challenge 2 full solution: {solutionFull2} ({execTimeFull2:F2} ms)");
             
             Console.WriteLine();
         }
