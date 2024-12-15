@@ -22,8 +22,6 @@ public class Day11Solver : Solver
 
         for (var t = 0; t < loops; t++)
         {
-            var i = 0;
-            
             foreach (var (num, count) in counts)
             {
                 var numStr = num.ToString();
