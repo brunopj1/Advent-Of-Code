@@ -2,7 +2,7 @@
 
 public static class DictionaryExtensions
 {
-    public static TValue ComputeIfAbsent<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key) where TValue : new()
+    public static TValue ComputeIfAbsent<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key) where TKey : notnull where TValue : new()
     {
         if (dictionary.TryGetValue(key, out var value)) return value;
 
