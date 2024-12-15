@@ -1,6 +1,4 @@
-﻿using System.Text;
-using System.Text.RegularExpressions;
-using Common;
+﻿using Common;
 
 namespace Year2024.Days;
 
@@ -57,26 +55,32 @@ public class Day06Solver : Solver
         
         var (dirX, dirY) = (-1, 0);
         var dirByte = DirUp;
-        
-        var result = 0;
 
-        for (var i = 0; i < maxX; i++)
+        var result = 0;
+        var lockObject = new object();
+        
+        Parallel.For(0, maxX, i =>
         {
+            var mapCopy = map.Select(v => v.ToArray()).ToArray();
+
             for (var j = 0; j < maxY; j++)
             {
                 if (i == x && j == y) continue;
-                
-                if (map[i][j] == Obstacle) continue;
 
-                map[i][j] = Obstacle;
-                
-                if (CheckLoop(map, maxX, maxY, x, y, dirX, dirY, dirByte)) result++;
+                if (mapCopy[i][j] == Obstacle) continue;
 
-                ClearMap(map, maxX, maxY);
-                
-                map[i][j] = Empty;
+                mapCopy[i][j] = Obstacle;
+
+                if (CheckLoop(mapCopy, maxX, maxY, x, y, dirX, dirY, dirByte))
+                {
+                    lock (lockObject) result++;
+                }
+
+                ClearMap(mapCopy, maxX, maxY);
+
+                mapCopy[i][j] = Empty;
             }
-        }
+        });
         
         return result;
     }
@@ -176,23 +180,5 @@ public class Day06Solver : Solver
                 if ((map[x][y] & Obstacle) == 0) map[x][y] = Empty;
             }
         }
-    }
-
-    private static string MapToString(byte[][] map)
-    {
-        StringBuilder sb = new();
-        foreach (var row in map)
-        {
-            foreach (var pos in row)
-            {
-                if (pos == Empty) sb.Append('.');
-                else if (pos == Obstacle) sb.Append('#');
-                else sb.Append('X');
-            }
-            
-            sb.AppendLine();
-        }
-        
-        return sb.ToString();
     }
 }
