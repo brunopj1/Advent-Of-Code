@@ -67,7 +67,4 @@ public class Day03Solver : Solver
 
         return result;
     }
-    
-    // got: 302612122202140
-    //  is: 3121910778619
 }
