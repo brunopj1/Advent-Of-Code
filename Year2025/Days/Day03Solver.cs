@@ -38,12 +38,6 @@ public class Day03Solver : Solver
     {
         ulong result = 0;
 
-        // para cada numero da solução final
-        // procurar o maior numero na linha que
-        //     1. esteja à direita do numero escolhido anteriormente
-        //     2. deixe espaço à esquerda para mais N numeros (tamanho restante nos chosen)
-        // controlar o inicio e fim do loop com base nesses 2 indices
-        
         foreach (var line in input)
         {
             var values = line.Select(c => c - '0').ToArray();
